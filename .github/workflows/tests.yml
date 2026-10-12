@@ -10,4 +10,4 @@ jobs:
       - name: Install distribution Python libraries
         run: sudo apt-get update && sudo apt-get install -y python3-requests python3-xlib python3-keyring python3-cryptography
       - name: Run isolated tests (no credentials, no desktop injection)
-        run: python3 -m unittest discover -s tests -v
+        run: /usr/bin/python3 -m unittest discover -s tests -v
