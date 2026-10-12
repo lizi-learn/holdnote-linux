@@ -1,0 +1,13 @@
+name: Core tests
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  ubuntu:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Install distribution Python libraries
+        run: sudo apt-get update && sudo apt-get install -y python3-requests python3-xlib python3-keyring python3-cryptography
+      - name: Run isolated tests (no credentials, no desktop injection)
+        run: python3 -m unittest discover -s tests -v

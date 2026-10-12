@@ -1,0 +1,17 @@
+[Unit]
+Description=HoldNote private text capture
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+UMask=0077
+Environment=PYTHONUNBUFFERED=1
+ExecStart=%h/.local/share/holdnote/venv/bin/holdnote daemon
+ExecStopPost=%h/.local/share/holdnote/venv/bin/holdnote restore-settings
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=10
+
+[Install]
+WantedBy=graphical-session.target

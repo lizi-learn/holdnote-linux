@@ -1,0 +1,15 @@
+memos.example.com {
+  encode zstd gzip
+  request_body {
+    max_size 1MB
+  }
+  header {
+    Strict-Transport-Security "max-age=31536000"
+    X-Content-Type-Options nosniff
+    Referrer-Policy no-referrer
+    X-Robots-Tag "noindex, nofollow"
+    Permissions-Policy "camera=(), microphone=(), geolocation=()"
+    -Server
+  }
+  reverse_proxy 127.0.0.1:5230
+}

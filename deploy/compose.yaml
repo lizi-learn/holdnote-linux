@@ -1,0 +1,25 @@
+services:
+  memos:
+    image: neosmemo/memos:0.31.0
+    container_name: holdnote-memos
+    restart: unless-stopped
+    user: "1000:1000"
+    ports:
+      - "127.0.0.1:5230:5230"
+    volumes:
+      - ./data:/var/opt/memos
+    environment:
+      MEMOS_MODE: prod
+      MEMOS_PORT: "5230"
+      MEMOS_DATA: /var/opt/memos
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=16m
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 512m
+    cpus: 0.75
+    pids_limit: 128
+    logging:
+      driver: json-file
+      options: {max-size: "5m", max-file: "2"}
